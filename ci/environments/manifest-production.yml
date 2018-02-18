@@ -13,7 +13,8 @@ applications:
     - config-server
 - name: FortunesLegacyService
   path: FortunesLegacyService/
-  no-route: true
+  routes:
+  - route: ftq-fortunes-service-legacy.apps.azure.pcf.cf-demo.com
   memory: 512M
   stack: windows2012R2
   health-check-type: http
