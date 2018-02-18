@@ -2,7 +2,8 @@
 applications:
 - name: FortunesLegacyUI
   path: FortunesFormsUI/
-  no-route: true
+  routes:
+  - route: ftq-fortunes-ui-legacy.apps.azure.pcf.cf-demo.com
   memory: 512M
   stack: windows2012R2
   health-check-type: http
@@ -22,7 +23,8 @@ applications:
    - mysql-fortunes
 - name: FortunesService
   path: FortunesServicesOwin/
-  no-route: true
+  routes:
+  - route: ftq-fortunes-service.apps.azure.pcf.cf-demo.com
   memory: 512M
   stack: windows2012R2
   health-check-type: http
@@ -33,7 +35,9 @@ applications:
     - mysql-fortunes
 - name: FortunesUI
   path: FortunesUI/
-  no-route: true
+  routes:
+  - route: ftq-fortunes-ui.apps.azure.pcf.cf-demo.com
+  random-route: true
   memory: 512M
   health-check-type: http
   buildpack: dotnet_core_buildpack
