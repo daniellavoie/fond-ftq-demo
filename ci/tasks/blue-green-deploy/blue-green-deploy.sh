@@ -3,6 +3,9 @@
 echo "Deploying to production"
 
 unzip artefacts/publish.zip -d artefacts
+rm artefacts/manifest.yml
+cp src/ci/environments/manifest-$ENVIRONMENT.yml artefacts/manifest.yml
+cf push -f src/ci/environments/manifest-$ENVIRONMENT.yml
 
 cf api $CF_API --skip-ssl-validation
 
@@ -15,7 +18,7 @@ cf rename FortunesLegacyUI FortunesLegacyUI-old
 cf rename FortunesService FortunesService-old
 cf rename FortunesUI FortunesUI-old
 
-cf push -f src/ci/environments/manifest-$ENVIRONMENT.yml
+cf push -f artefacts/manifest.yml
 
 cf delete -f FortunesLegacyService-old
 cf delete -f FortunesLegacyUI-old

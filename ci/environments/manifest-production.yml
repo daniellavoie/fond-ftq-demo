@@ -1,7 +1,7 @@
 ---
 applications:
 - name: FortunesLegacyUI
-  path: artefacts/FortunesFormsUI/
+  path: FortunesFormsUI/
   routes:
   - route: ftq-fortunes-ui-legacy.apps.azure.pcf.cf-demo.com
   memory: 512M
@@ -12,7 +12,7 @@ applications:
     - eureka
     - config-server
 - name: FortunesLegacyService
-  path: artefacts/FortunesLegacyService/
+  path: FortunesLegacyService/
   routes:
   - route: ftq-fortunes-service-legacy.apps.azure.pcf.cf-demo.com
   memory: 512M
@@ -23,7 +23,7 @@ applications:
    - eureka
    - mysql-fortunes
 - name: FortunesService
-  path: artefacts/FortunesServicesOwin/
+  path: FortunesServicesOwin/
   routes:
   - route: ftq-fortunes-service.apps.azure.pcf.cf-demo.com
   memory: 512M
@@ -35,7 +35,7 @@ applications:
     - eureka
     - mysql-fortunes
 - name: FortunesUI
-  path: artefacts/FortunesUI/
+  path: FortunesUI/
   routes:
   - route: ftq-fortunes-ui.apps.azure.pcf.cf-demo.com
   random-route: true
