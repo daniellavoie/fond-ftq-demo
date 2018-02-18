@@ -2,6 +2,8 @@
 
 echo "Deploying to production"
 
+unzip artefacts/publish.zip -d artefacts
+
 cf api $CF_API --skip-ssl-validation
 
 cf auth $CF_USER $CF_PASSWORD
