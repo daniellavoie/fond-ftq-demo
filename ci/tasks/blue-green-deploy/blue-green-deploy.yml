@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: springcloudservices/spring-cloud-base
+
+inputs:
+- name: src
+- name: artefacts
+
+params:
+  ENVIRONMENT: 
+  CF_API:
+  CF_USER: 
+  CF_PASSWORD:
+  CF_ORG:
+  CF_SPACE:
+
+run:
+  path: src/ci/tasks/blue-green-deploy/blue-green-deploy.sh

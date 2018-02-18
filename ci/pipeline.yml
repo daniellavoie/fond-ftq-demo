@@ -1,0 +1,50 @@
+---
+jobs:
+
+- name: blue-green-deploy-production
+  serial_groups: [production-deployment]
+  plan:
+  - get: src-master
+  - get: artefacts-production
+  - task: blue-green-deploy
+    file: src-master/ci/tasks/blue-green-deploy/blue-green-deploy.yml
+    input_mapping:
+      src: src-master
+      artefacts: artefacts-production
+    params:
+      ENVIRONMENT: production
+      CF_API: {{cf-api}}
+      CF_USER: {{cf-user}}
+      CF_PASSWORD: {{cf-password}}
+      CF_ORG: {{cf-org}}
+      CF_SPACE: {{cf-space}}
+
+- name: run-smoke-tests
+  serial_groups: [production-deployment]
+  plan:
+  - get: src-master
+    passed: [blue-green-deploy-production]
+    trigger: true
+  - task: run-smoke-tests
+    file: src-master/ci/tasks/smoke-tests/smoke-tests.yml    
+    input_mapping:
+      src: src-master
+
+resources:
+
+- name: src-master
+  type: git
+  source:
+    uri: {{github-ops-url}}
+    username: {{github-username}}
+    password: {{github-password}}
+    branch: master
+
+- name: artefacts-production
+  type: s3
+  source:
+    bucket: {{s3-bucket}}
+    versioned_file: artefacts-production/publish.zip
+    region_name: us-east-2
+    access_key_id: {{s3-access-key-id}}
+    secret_access_key: {{s3-secret-access-key}}
