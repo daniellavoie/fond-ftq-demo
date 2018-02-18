@@ -16,8 +16,8 @@ jobs:
       CF_API: {{cf-api}}
       CF_USER: {{cf-user}}
       CF_PASSWORD: {{cf-password}}
-      CF_ORG: {{cf-org}}
-      CF_SPACE: {{cf-space}}
+      CF_ORG: ftq
+      CF_SPACE: ftq-demo-production
 
 - name: run-smoke-tests
   serial_groups: [production-deployment]

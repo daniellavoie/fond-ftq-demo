@@ -5,7 +5,6 @@ echo "Deploying to production"
 unzip artefacts/publish.zip -d artefacts
 rm artefacts/manifest.yml
 cp src/ci/environments/manifest-$ENVIRONMENT.yml artefacts/manifest.yml
-cf push -f src/ci/environments/manifest-$ENVIRONMENT.yml
 
 cf api $CF_API --skip-ssl-validation
 
